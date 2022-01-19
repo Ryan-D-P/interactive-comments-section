@@ -27,6 +27,18 @@ body {
   }
 }
 
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+@media screen and (min-width: 1000px) {
+  .main-content {
+    gap: 30px;
+  }
+}
+
 h1 {
   font-size: clamp(4rem, 4vw, 7rem);
 }

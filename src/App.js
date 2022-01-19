@@ -7,9 +7,7 @@ function App() {
     <div className="App">
       <main className="main-content">
         <Comments />
-
-        {/* <Post /> */}
-
+        <Post />
       </main>
 
       {/* <Attribution /> */}

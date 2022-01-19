@@ -1,0 +1,84 @@
+:root {
+    --post-height: 150px;
+}
+
+.Post {
+    background-color: hsl(0, 0%, 100%);
+    position: relative;
+    border-radius: 10px;
+    min-height: var(--post-height);
+    padding: 1rem;
+}
+
+@media screen and (min-width: 1000px) {
+    .Post {
+        padding: 2rem;
+    }
+}
+
+.post-wrapper {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-around;
+    align-items: flex-start;
+    min-height: var(--post-height);
+}
+
+@media screen and (min-width: 1000px) {
+    .post-wrapper {
+        flex-direction: row;
+        justify-content: flex-start;
+        width: 90%;
+    }
+}
+
+.post-profileimg, .post-body, .post-submit {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.post-body {
+    width: 100%;
+}
+
+.post-body > input {
+    width: 100%;
+    padding: 2rem;
+    padding-bottom: 5rem;
+    border-radius: 10px;
+}
+
+@media screen and (min-width: 1000px) {
+    .post-body > input {
+        padding-bottom: 6rem;
+    }
+}
+
+.post-submit {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+}
+
+@media screen and (min-width: 1000px) {
+    .post-submit {
+        right: 2rem;
+        top: 2rem;
+    }
+}
+
+.post-submit > button {
+    background-color: hsl(280, 50%, 40%);
+    color: hsl(0, 0%, 100%);
+    width: 100%;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 10px;
+}
+
+@media screen and (min-width: 1000px) {
+    .post-submit > button {
+        padding: 2rem 5rem;
+    }
+}
