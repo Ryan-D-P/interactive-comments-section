@@ -1,11 +1,11 @@
 import "./Post.css";
 
-const Post = () => {
+const Post = ({ juliusomoProfileImg }) => {
     return (
         <div className="Post">
             <div className="post-wrapper">
                 <div className="post-profileimg">
-                    <p>profile-img</p>
+                    <img src={ juliusomoProfileImg } alt="user profile" />
                 </div>
                 <form onSubmit={ (e) => e.preventDefault() }>
                     <div className="post-body">

@@ -1,5 +1,5 @@
 :root {
-    --post-height: 150px;
+    --post-height: 100px;
 }
 
 .Post {
@@ -19,7 +19,7 @@
 .post-wrapper {
     display: flex;
     flex-direction: column-reverse;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: flex-start;
     min-height: var(--post-height);
 }

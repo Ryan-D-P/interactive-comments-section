@@ -1,6 +1,6 @@
 import "./Comments.css";
 
-const Comments = () => {
+const Comments = ({ amyrobsonProfileImg, maxblagunProfileImg, ramsesmironProfileImg, juliusomoProfileImg, plus, minus }) => {
     return (
         <div className="Comments">
             <div className="comment-content-wrapper">
@@ -8,19 +8,19 @@ const Comments = () => {
                     <div className="comment-ratings-wrapper">
                         <div className="comment-ratings">
                             <div className="rating-plus">
-                                <p>+</p>
+                                <img src={ plus } alt="plus" />
                             </div>
                             <div className="rating-count">
                                 <p>12</p>
                             </div>
                             <div className="rating-minus">
-                                <p>-</p>
+                            <img src={ minus } alt="minus" />
                             </div>
                         </div>
                     </div>
                     <div className="comment-body">
                         <div className="comment-user">
-                            <p className="comment-profileimg">profile-img</p>
+                            <img src={ amyrobsonProfileImg } alt={ "comment profile" } className="comment-profileimg" />
                             <p className="comment-username">amyrobson</p>
                             <p className="comment-date">1 month ago</p>
                         </div>
@@ -40,20 +40,20 @@ const Comments = () => {
                     <div className="comment-ratings-wrapper">
                         <div className="comment-ratings">
                             <div className="rating-plus">
-                                <p>+</p>
+                            <img src={ plus } alt="plus" />
                             </div>
                             <div className="rating-count">
                                 <p>5</p>
                             </div>
                             <div className="rating-minus">
-                                <p>-</p>
+                            <img src={ minus } alt="minus" />
                             </div>
                         </div>
                     </div>
                     <div className="comment-body">
                         <div className="comment-user">
-                            <p className="comment-profileimg">profile-img</p>
-                            <p className="comment-username">amyrobson</p>
+                            <img src={ maxblagunProfileImg } alt={ "comment profile" } className="comment-profileimg" />
+                            <p className="comment-username">maxblagun</p>
                             <p className="comment-date">2 weeks ago</p>
                             <div className="comment-actions">
                                 <div className="comment-reply">
@@ -70,20 +70,20 @@ const Comments = () => {
                     <div className="comment-ratings-wrapper">
                         <div className="comment-ratings">
                             <div className="rating-plus">
-                                <p>+</p>
+                            <img src={ plus } alt="plus" />
                             </div>
                             <div className="rating-count">
                                 <p>4</p>
                             </div>
                             <div className="rating-minus">
-                                <p>-</p>
+                            <img src={ minus } alt="minus" />
                             </div>
                         </div>
                     </div>
                     <div className="comment-body">
                         <div className="comment-user">
-                            <p className="comment-profileimg">profile-img</p>
-                            <p className="comment-username">amyrobson</p>
+                            <img src={ ramsesmironProfileImg } alt={ "comment profile" } className="comment-profileimg" />
+                            <p className="comment-username">ramsesmiron</p>
                             <p className="comment-date">1 week ago</p>
                             <div className="comment-actions">
                                 <div className="comment-reply">
@@ -100,20 +100,20 @@ const Comments = () => {
                     <div className="comment-ratings-wrapper">
                         <div className="comment-ratings">
                             <div className="rating-plus">
-                                <p>+</p>
+                            <img src={ plus } alt="plus" />
                             </div>
                             <div className="rating-count">
                                 <p>2</p>
                             </div>
                             <div className="rating-minus">
-                                <p>-</p>
+                            <img src={ minus } alt="minus" />
                             </div>
                         </div>
                     </div>
                     <div className="comment-body">
                         <div className="comment-user">
-                            <p className="comment-profileimg">profile-img</p>
-                            <p className="comment-username">amyrobson</p>
+                            <img src={ juliusomoProfileImg } alt={ "comment profile" } className="comment-profileimg" />
+                            <p className="comment-username">juliusomo</p>
                             <p className="comment-date">2 days ago</p>
                             <div className="comment-actions">
                                 <div className="comment-delete">

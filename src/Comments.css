@@ -2,13 +2,13 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 15px;
+    gap: 10px;
 }
 
 .comment-content-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
 }
 
 .comment {
@@ -18,7 +18,7 @@
     justify-content: space-between;
     gap: 15px;
     position: relative;
-    padding: 2rem;
+    padding: 1rem 2rem;
     border-radius: 10px;
 }
 
@@ -69,15 +69,37 @@
     color: hsl(240, 100%, 60%);
     display: flex;
     justify-content: space-between;
-    gap: 20px;
-    padding: 1rem 3rem;
+    align-items: center;
+    gap: 30px;
+    padding: 1rem;
     border-radius: 10px;
 }
 
 @media screen and (min-width: 1000px) {
     .comment-ratings {
         flex-direction: column;
-        padding: 1rem 2rem;
+        padding: 2rem 0rem;
+        width: 60px;
+    }
+}
+
+.rating-plus, .rating-minus {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rating-plus > img, .rating-minus > img {
+    width: 14px;
+}
+
+@media screen and (min-width: 1000px) {
+    .rating-plus > img, .rating-minus > img {
+        width: 20px;
+    }
+
+    .rating-count > p {
+        font-size: 2rem;
     }
 }
 
@@ -89,12 +111,23 @@
 
 .comment-user {
     display: flex;
+    align-items: center;
     gap: 20px;
 }
 
 @media screen and (min-width: 1000px) {
     .comment-user {
         gap: 50px;
+    }
+}
+
+.comment-profileimg, .post-profileimg > img {
+    width: 40px;
+}
+
+@media screen and (min-width: 1000px) {
+    .comment-profileimg, .post-profileimg > img {
+        width: 50px;
     }
 }
 
