@@ -1,16 +1,16 @@
-const Comment = ({ plus, minus, commentType, score, username, profileImg, createdAt, content }) => {
+const Comment = ({ plus, minus, commentType, id, score, username, profileImg, createdAt, content, upvote, downvote }) => {
     return (
         <div className={ `comment ${commentType}` }>
             <div className="comment-ratings-wrapper">
                 <div className="comment-ratings">
                     <div className="rating-plus">
-                        <img src={ plus } alt="plus" />
+                        <img src={ plus } alt="plus" onClick={ () => upvote(id) } />
                     </div>
                     <div className="rating-count">
                         <p>{ score }</p>
                     </div>
                     <div className="rating-minus">
-                        <img src={ minus } alt="minus" />
+                        <img src={ minus } alt="minus" onClick={ () => downvote(id) } />
                     </div>
                 </div>
             </div>

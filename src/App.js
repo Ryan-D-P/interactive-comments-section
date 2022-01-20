@@ -8,24 +8,29 @@ import juliusomoProfileImg from "./images/avatars/image-juliusomo.png";
 import plus from "./images/icon-plus.svg";
 import minus from "./images/icon-minus.svg";
 import { useState } from 'react';
+import data from "./data.json";
 
 function App() {
   // State to store th comments data
-  const [comments, setComments] = useState({});
+  const [comments, setComments] = useState(data);
 
-  // Function to get the user comments from the JSON file
-  const getComments = async () => {
-    const response = await fetch("http://localhost:3000/data.json");
-    const data = await response.json();
+  // Functions to update the state when a comment is upvoted/downvoted
+  const incRatingState = (id) => {
+    const obj = {...comments};
+    obj.comments.find(comment => comment.id === id).score += 1;
+    setComments(obj);
+  };
 
-    // Update the state with the fetched comments JSON data
-    setComments(data);
+  const decRatingState = (id) => {
+    const obj = {...comments};
+    obj.comments.find(comment => comment.id === id).score -= 1;
+    setComments(obj);
   };
 
   return (
     <div className="App">
       <main className="main-content">
-        <Comments amyrobsonProfileImg={ amyrobsonProfileImg } maxblagunProfileImg={ maxblagunProfileImg } ramsesmironProfileImg={ ramsesmironProfileImg } juliusomoProfileImg={ juliusomoProfileImg } plus={ plus } minus={ minus } comments={ comments } getComments={ getComments } />
+        <Comments amyrobsonProfileImg={ amyrobsonProfileImg } maxblagunProfileImg={ maxblagunProfileImg } ramsesmironProfileImg={ ramsesmironProfileImg } juliusomoProfileImg={ juliusomoProfileImg } plus={ plus } minus={ minus } comments={ comments } incRatingState={ incRatingState } decRatingState={ decRatingState } />
         <Post juliusomoProfileImg={ juliusomoProfileImg } />
       </main>
 
