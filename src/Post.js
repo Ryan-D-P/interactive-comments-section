@@ -7,12 +7,14 @@ const Post = () => {
                 <div className="post-profileimg">
                     <p>profile-img</p>
                 </div>
-                <div className="post-body">
-                    <input type="text" placeholder="Add a comment..." />
-                </div>
-            </div>
-            <div className="post-submit">
-                    <button>SEND</button>
+                <form onSubmit={ (e) => e.preventDefault() }>
+                    <div className="post-body">
+                        <textarea name="user-comment" placeholder="Add a comment..." maxLength="800" rows="3" cols="150" required></textarea>
+                    </div>
+                    <div className="post-submit">
+                            <button type="button">SEND</button>
+                    </div>
+                </form>
             </div>
         </div>
     );

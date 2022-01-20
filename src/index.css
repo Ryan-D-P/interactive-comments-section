@@ -43,7 +43,7 @@ h1 {
   font-size: clamp(4rem, 4vw, 7rem);
 }
 
-p, a, div {
+p, a, textarea, div {
   font-size: clamp(1.6rem, 2vw, 2rem);
 }
 
