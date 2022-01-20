@@ -1,135 +1,37 @@
+import { useEffect } from "react";
 import "./Comments.css";
+import Comment from "./Comment";
 
-const Comments = ({ amyrobsonProfileImg, maxblagunProfileImg, ramsesmironProfileImg, juliusomoProfileImg, plus, minus }) => {
+const Comments = ({ amyrobsonProfileImg, maxblagunProfileImg, ramsesmironProfileImg, juliusomoProfileImg, plus, minus, comments, getComments }) => {
+    // Get data from JSON file when component is mounted
+    useEffect(() => getComments(), []);
+
+    // Object to store the profile image URLs
+    const profileImages = {
+        amyrobson: amyrobsonProfileImg,
+        maxblagun: maxblagunProfileImg,
+        ramsesmiron: ramsesmironProfileImg,
+        juliusomo: juliusomoProfileImg,
+    };
+
     return (
         <div className="Comments">
-            <div className="comment-content-wrapper">
-                <div className="comment root-comment">
-                    <div className="comment-ratings-wrapper">
-                        <div className="comment-ratings">
-                            <div className="rating-plus">
-                                <img src={ plus } alt="plus" />
-                            </div>
-                            <div className="rating-count">
-                                <p>12</p>
-                            </div>
-                            <div className="rating-minus">
-                            <img src={ minus } alt="minus" />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="comment-body">
-                        <div className="comment-user">
-                            <img src={ amyrobsonProfileImg } alt={ "comment profile" } className="comment-profileimg" />
-                            <p className="comment-username">amyrobson</p>
-                            <p className="comment-date">1 month ago</p>
-                        </div>
-                        <div className="comment-post">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam dolore eveniet quia corrupti alias, doloremque facere a, harum aut, impedit nostrum maiores. Accusantium laborum ad suscipit corrupti eum molestias reiciendis consequuntur, quos cupiditate minima numquam necessitatibus magni delectus natus quas sit impedit velit est! Corrupti cum culpa officia adipisci reprehenderit.</p>
-                        </div>
-                    </div>
-                    <div className="comment-actions">
-                            <div className="reply">
-                                <p>Reply</p>
-                            </div>
-                    </div>
-                </div>
-            </div>
-            <div className="comment-content-wrapper">
-                <div className="comment root-comment">
-                    <div className="comment-ratings-wrapper">
-                        <div className="comment-ratings">
-                            <div className="rating-plus">
-                            <img src={ plus } alt="plus" />
-                            </div>
-                            <div className="rating-count">
-                                <p>5</p>
-                            </div>
-                            <div className="rating-minus">
-                            <img src={ minus } alt="minus" />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="comment-body">
-                        <div className="comment-user">
-                            <img src={ maxblagunProfileImg } alt={ "comment profile" } className="comment-profileimg" />
-                            <p className="comment-username">maxblagun</p>
-                            <p className="comment-date">2 weeks ago</p>
-                            <div className="comment-actions">
-                                <div className="comment-reply">
-                                    <p>Reply</p>
+            {
+                // For each comment stored in the data: output the template component
+                comments.comments && comments.comments.map((comment) => (
+                    <div key={ comment.id } className="comment-content-wrapper">
+                        <Comment plus={ plus } minus={ minus } commentType={ "root-comment" } score={ comment.score } username={ comment.user.username } profileImg={ profileImages[comment.user.username] } createdAt={ comment.createdAt } content={ comment.content } />
+                        {
+                            // For each reply comment of this comment: output the template component
+                            comment.replies.map((reply) => (
+                                <div key={ reply.id } className="reply-wrapper">
+                                    <Comment plus={ plus } minus={ minus } commentType={ "reply-comment" } score={ reply.score } username={ reply.user.username } profileImg={ profileImages[reply.user.username] } createdAt={ reply.createdAt } content={ reply.content } />
                                 </div>
-                            </div>
-                        </div>
-                        <div className="comment-post">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam dolore eveniet quia corrupti alias, doloremque facere a, harum aut, impedit nostrum maiores. Accusantium laborum ad suscipit corrupti eum molestias reiciendis consequuntur, quos cupiditate minima numquam necessitatibus magni delectus natus quas sit impedit velit est! Corrupti cum culpa officia adipisci reprehenderit.</p>
-                        </div>
+                            ))
+                        }
                     </div>
-                </div>
-                <div className="comment reply-comment">
-                    <div className="comment-ratings-wrapper">
-                        <div className="comment-ratings">
-                            <div className="rating-plus">
-                            <img src={ plus } alt="plus" />
-                            </div>
-                            <div className="rating-count">
-                                <p>4</p>
-                            </div>
-                            <div className="rating-minus">
-                            <img src={ minus } alt="minus" />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="comment-body">
-                        <div className="comment-user">
-                            <img src={ ramsesmironProfileImg } alt={ "comment profile" } className="comment-profileimg" />
-                            <p className="comment-username">ramsesmiron</p>
-                            <p className="comment-date">1 week ago</p>
-                            <div className="comment-actions">
-                                <div className="comment-reply">
-                                    <p>Reply</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="comment-post">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam dolore eveniet quia corrupti alias, doloremque facere a, harum aut, impedit nostrum maiores. Accusantium laborum ad suscipit corrupti eum molestias reiciendis consequuntur, quos cupiditate minima numquam necessitatibus magni delectus natus quas sit impedit velit est! Corrupti cum culpa officia adipisci reprehenderit.</p>
-                        </div>
-                    </div>
-                </div>
-                <div className="comment reply-comment">
-                    <div className="comment-ratings-wrapper">
-                        <div className="comment-ratings">
-                            <div className="rating-plus">
-                            <img src={ plus } alt="plus" />
-                            </div>
-                            <div className="rating-count">
-                                <p>2</p>
-                            </div>
-                            <div className="rating-minus">
-                            <img src={ minus } alt="minus" />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="comment-body">
-                        <div className="comment-user">
-                            <img src={ juliusomoProfileImg } alt={ "comment profile" } className="comment-profileimg" />
-                            <p className="comment-username">juliusomo</p>
-                            <p className="comment-date">2 days ago</p>
-                            <div className="comment-actions">
-                                <div className="comment-delete">
-                                    <p>Delete</p>
-                                </div>
-                                <div className="comment-edit">
-                                    <p>Edit</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="comment-post">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam dolore eveniet quia corrupti alias, doloremque facere a, harum aut, impedit nostrum maiores. Accusantium laborum ad suscipit corrupti eum molestias reiciendis consequuntur, quos cupiditate minima numquam necessitatibus magni delectus natus quas sit impedit velit est! Corrupti cum culpa officia adipisci reprehenderit.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                ))
+            }
         </div>
     );
 }
