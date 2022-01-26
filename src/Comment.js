@@ -1,4 +1,7 @@
-const Comment = ({ plus, minus, commentType, id, score, username, profileImg, createdAt, content, upvote, downvote }) => {
+import plus from "./images/icon-plus.svg";
+import minus from "./images/icon-minus.svg";
+
+const Comment = ({ commentType, id, score, username, profileImg, createdAt, content, upvote, downvote }) => {
     return (
         <div className={ `comment ${commentType}` }>
             <div className="comment-ratings-wrapper">
