@@ -9,20 +9,24 @@ import { useState } from "react";
 
 const Comments = () => {
     // State to store the comments data
-    const [comments, setComments] = useState(data);
+    const [userDataObj, setUserDataObj] = useState(data);
+
+    // Function to set the user state when a comment rating is changed
+    const changeCommentRating = (parentId, id, value) => {
+        const newArr = [...userDataObj.comments];
+
+        // Get the nearest root comment
+        const rootComment = newArr.find(comment => comment.id === parentId || comment.id === id);
+        // If root comment has replies: comment to change is a reply comment; else it's a root comment
+        const targetComment = rootComment.replies?.find(reply => reply.id === id) || rootComment;
+        targetComment.score += value;
+
+        setUserDataObj({...userDataObj, comments: newArr});
+    };
 
     // Functions to update the state when a comment is upvoted/downvoted
-    const upvote = (id) => {
-        const obj = {...comments};
-        obj.comments.find(comment => comment.id === id).score += 1;
-        setComments(obj);
-    };
-
-    const downvote = (id) => {
-        const obj = {...comments};
-        obj.comments.find(comment => comment.id === id).score -= 1;
-        setComments(obj);
-    };
+    const upvote = (parentId, id) => changeCommentRating(parentId, id, 1);
+    const downvote = (parentId, id) => changeCommentRating(parentId, id, -1);
 
     // Object to store the profile image URLs
     const profileImages = {
@@ -36,15 +40,36 @@ const Comments = () => {
         <div className="Comments">
             {
                 // For each comment stored in the data: output the template component
-                comments.comments && comments.comments.map((comment) => (
+                userDataObj.comments && userDataObj.comments.map((comment) => (
                     <div key={ comment.id } className="comment-content-wrapper">
-                        <Comment commentType={ "root-comment" } id={ comment.id } score={ comment.score } username={ comment.user.username } profileImg={ profileImages[comment.user.username] } createdAt={ comment.createdAt } content={ comment.content } upvote={ upvote } downvote={ downvote } />
+                        <Comment
+                            commentType={ "root-comment" }
+                            id={ comment.id }
+                            score={ comment.score }
+                            username={ comment.user.username }
+                            profileImg={ profileImages[comment.user.username] }
+                            createdAt={ comment.createdAt }
+                            content={ comment.content }
+                            upvote={ upvote }
+                            downvote={ downvote } 
+                        />
 
                         {
                             // For each reply comment of this comment: output the template component
                             comment.replies.map((reply) => (
                                 <div key={ reply.id } className="reply-wrapper">
-                                    <Comment commentType={ "reply-comment" } score={ reply.score } username={ reply.user.username } profileImg={ profileImages[reply.user.username] } createdAt={ reply.createdAt } content={ reply.content } upvote={ upvote } downvote={ downvote } />
+                                    <Comment
+                                        commentType={ "reply-comment" }
+                                        parentId={ comment.id }
+                                        id={ reply.id }
+                                        score={ reply.score } 
+                                        username={ reply.user.username } 
+                                        profileImg={ profileImages[reply.user.username] } 
+                                        createdAt={ reply.createdAt } 
+                                        content={ reply.content } 
+                                        upvote={ upvote } 
+                                        downvote={ downvote }
+                                    />
                                 </div>
                             ))
                         }

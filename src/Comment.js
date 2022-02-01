@@ -1,19 +1,19 @@
 import plus from "./images/icon-plus.svg";
 import minus from "./images/icon-minus.svg";
 
-const Comment = ({ commentType, id, score, username, profileImg, createdAt, content, upvote, downvote }) => {
+const Comment = ({ commentType, parentId, id, score, username, profileImg, createdAt, content, upvote, downvote }) => {
     return (
         <div className={ `comment ${commentType}` }>
             <div className="comment-ratings-wrapper">
                 <div className="comment-ratings">
                     <div className="rating-plus">
-                        <img src={ plus } alt="plus" onClick={ () => upvote(id) } />
+                        <img src={ plus } alt="plus" onClick={ () => upvote(parentId, id) } />
                     </div>
                     <div className="rating-count">
                         <p>{ score }</p>
                     </div>
                     <div className="rating-minus">
-                        <img src={ minus } alt="minus" onClick={ () => downvote(id) } />
+                        <img src={ minus } alt="minus" onClick={ () => downvote(parentId, id) } />
                     </div>
                 </div>
             </div>
