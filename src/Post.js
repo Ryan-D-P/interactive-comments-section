@@ -1,6 +1,10 @@
 import "./Post.css";
+import amyrobsonProfileImg from  "./images/avatars/image-amyrobson.png";
+import maxblagunProfileImg from "./images/avatars/image-maxblagun.png";
+import ramsesmironProfileImg from "./images/avatars/image-ramsesmiron.png";
+import juliusomoProfileImg from "./images/avatars/image-juliusomo.png";
 
-const Post = ({ juliusomoProfileImg }) => {
+const Post = () => {
     return (
         <div className="Post">
             <div className="post-wrapper">
