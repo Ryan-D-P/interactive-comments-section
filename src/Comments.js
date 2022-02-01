@@ -25,8 +25,14 @@ const Comments = () => {
     };
 
     // Functions to update the state when a comment is upvoted/downvoted
-    const upvote = (parentId, id) => changeCommentRating(parentId, id, 1);
-    const downvote = (parentId, id) => changeCommentRating(parentId, id, -1);
+    const upvote = (parentId, id, plusActive, minusActive) => {
+        const value = plusActive ? -1 : minusActive ? 2 : 1;
+        changeCommentRating(parentId, id, value);
+    };
+    const downvote = (parentId, id, plusActive, minusActive) => {
+        const value = plusActive ? -2 : minusActive ? 1 : -1;
+        changeCommentRating(parentId, id, value);
+    };
 
     // Object to store the profile image URLs
     const profileImages = {
