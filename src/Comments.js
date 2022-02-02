@@ -5,7 +5,7 @@ import maxblagunProfileImg from "./images/avatars/image-maxblagun.png";
 import ramsesmironProfileImg from "./images/avatars/image-ramsesmiron.png";
 import juliusomoProfileImg from "./images/avatars/image-juliusomo.png";
 
-const Comments = ({ userDataObj, setUserDataObj }) => {
+const Comments = ({ userDataObj, setUserDataObj, getId, setId }) => {
     // Function to set the user state when a comment rating is changed
     const changeCommentRating = (parentId, id, value) => {
         const newArr = [...userDataObj.comments];
@@ -56,6 +56,11 @@ const Comments = ({ userDataObj, setUserDataObj }) => {
                         />
 
                         {
+                            // Set ID for a new comment if root ID is max
+                            setId(Math.max(getId(), comment.id)) && ""
+                        }
+
+                        {
                             // For each reply comment of this comment: output the template component
                             comment.replies.map((reply) => (
                                 <div key={ reply.id } className="reply-wrapper">
@@ -71,6 +76,11 @@ const Comments = ({ userDataObj, setUserDataObj }) => {
                                         upvote={ upvote } 
                                         downvote={ downvote }
                                     />
+
+                                    {
+                                        // Set ID for a new comment if reply ID is max
+                                        setId(Math.max(getId(), reply.id)) && ""
+                                    }
                                 </div>
                             ))
                         }

@@ -4,30 +4,14 @@ import maxblagunProfileImg from "./images/avatars/image-maxblagun.png";
 import ramsesmironProfileImg from "./images/avatars/image-ramsesmiron.png";
 import juliusomoProfileImg from "./images/avatars/image-juliusomo.png";
 
-const Post = ({ userDataObj, setUserDataObj }) => {
-    // Function to get a new ID for a posted comment
-    const getNewId = () => {
-        // Find the max root ID
-        const rootId = userDataObj.comments.reduce((previous, current) => Math.max(previous, current.id), 0);
-
-        // Return an array of the highest reply ID for each root comment
-        const replies = userDataObj.comments.map(comment => {
-            if (comment.replies.length) return comment.replies.reduce((previous, current) => Math.max(previous, current.id), 0);
-            return 0;
-        });
-        // Find the max reply ID
-        const replyId = Math.max(...replies);
-
-        // Get the new ID for the comment by getting highest existing ID
-        return Math.max(rootId, replyId) + 1;
-    }
-
+const Post = ({ userDataObj, setUserDataObj, getId }) => {
     // Submit event function to post a new root comment
     const sendComment = (e) => {
         e.preventDefault();
+
         // Create object for the newly posted comment
         const postedComment = {
-            id: getNewId(),
+            id: getId() + 1,
             content: e.target[0].value,
             createdAt: "Just Now",
             replies: [],
@@ -37,7 +21,6 @@ const Post = ({ userDataObj, setUserDataObj }) => {
 
         // Add the newly posted comment to the user data state
         setUserDataObj({...userDataObj, comments: [...userDataObj.comments, postedComment]});
-
         e.target[0].value = "";
     };
 
