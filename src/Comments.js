@@ -4,13 +4,8 @@ import amyrobsonProfileImg from  "./images/avatars/image-amyrobson.png";
 import maxblagunProfileImg from "./images/avatars/image-maxblagun.png";
 import ramsesmironProfileImg from "./images/avatars/image-ramsesmiron.png";
 import juliusomoProfileImg from "./images/avatars/image-juliusomo.png";
-import data from "./data.json";
-import { useState } from "react";
 
-const Comments = () => {
-    // State to store the comments data
-    const [userDataObj, setUserDataObj] = useState(data);
-
+const Comments = ({ userDataObj, setUserDataObj }) => {
     // Function to set the user state when a comment rating is changed
     const changeCommentRating = (parentId, id, value) => {
         const newArr = [...userDataObj.comments];
@@ -57,7 +52,7 @@ const Comments = () => {
                             createdAt={ comment.createdAt }
                             content={ comment.content }
                             upvote={ upvote }
-                            downvote={ downvote } 
+                            downvote={ downvote }
                         />
 
                         {
