@@ -10,7 +10,10 @@ function App() {
   // Stores the ID for a newly posted comment
   let newId = 1;
   const getId = () => newId;
-  const setId = (value) => newId = value;
+  const setId = (value) => {
+    newId = value;
+    return null;
+  }
 
   return (
     <div className="App">

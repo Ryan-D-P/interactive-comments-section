@@ -57,7 +57,7 @@ const Comments = ({ userDataObj, setUserDataObj, getId, setId }) => {
 
                         {
                             // Set ID for a new comment if root ID is max
-                            setId(Math.max(getId(), comment.id)) && ""
+                            setId(Math.max(getId(), comment.id))
                         }
 
                         {
@@ -79,7 +79,7 @@ const Comments = ({ userDataObj, setUserDataObj, getId, setId }) => {
 
                                     {
                                         // Set ID for a new comment if reply ID is max
-                                        setId(Math.max(getId(), reply.id)) && ""
+                                        setId(Math.max(getId(), reply.id))
                                     }
                                 </div>
                             ))
