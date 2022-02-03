@@ -72,7 +72,8 @@ const Comments = ({ userDataObj, setUserDataObj, getId, setId }) => {
                                         username={ reply.user.username } 
                                         profileImg={ profileImages[reply.user.username] } 
                                         createdAt={ reply.createdAt } 
-                                        content={ reply.content } 
+                                        content={ reply.content }
+                                        replyingTo={ reply.replyingTo }
                                         upvote={ upvote } 
                                         downvote={ downvote }
                                     />

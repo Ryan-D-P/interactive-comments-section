@@ -60,6 +60,11 @@
     }
 }
 
+.reply-comment span {
+    color: hsl(239, 100%, 56%);
+    font-weight: 700;
+}
+
 .comment-ratings-wrapper {
     display: flex;
 }
@@ -115,12 +120,6 @@
     display: flex;
     align-items: center;
     gap: 20px;
-}
-
-@media screen and (min-width: 1000px) {
-    .comment-user {
-        gap: 50px;
-    }
 }
 
 .comment-profileimg, .post-profileimg > img {
