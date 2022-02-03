@@ -17,7 +17,7 @@ const Post = ({ userDataObj, setUserDataObj, getId }) => {
             replies: [],
             score: 0,
             user: {image: {png: juliusomoProfileImg, webp: juliusomoProfileImg}, username: "juliusomo"},
-        }
+        };
 
         // Add the newly posted comment to the user data state
         setUserDataObj({...userDataObj, comments: [...userDataObj.comments, postedComment]});

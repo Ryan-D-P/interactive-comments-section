@@ -4,7 +4,7 @@ import activePlus from "./images/icon-plus-active.svg";
 import activeMinus from "./images/icon-minus-active.svg";
 import { useState } from "react";
 
-const Comment = ({ commentType, parentId, id, score, username, profileImg, createdAt, content, replyingTo, upvote, downvote }) => {
+const Comment = ({ commentType, parentId, id, score, username, profileImg, createdAt, content, replyingTo, upvote, downvote, replyToComment }) => {
     // Manage the state for active upvote/downvote ratings for a comment
     const [upvoteState, setUpvoteState] = useState({active: false, src: plus});
     const [downvoteState, setDownvoteState] = useState({active: false, src: minus});
@@ -52,7 +52,7 @@ const Comment = ({ commentType, parentId, id, score, username, profileImg, creat
             </div>
             <div className="comment-actions">
                 <div className="reply">
-                    <p>Reply</p>
+                    <p data-parent-id={ parentId } data-id={ id } data-comment-user={ username } onClick={ (e) => replyToComment(e) }>Reply</p>
                 </div>
             </div>
         </div>

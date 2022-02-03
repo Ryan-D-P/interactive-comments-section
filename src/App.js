@@ -13,7 +13,7 @@ function App() {
   const setId = (value) => {
     newId = value;
     return null;
-  }
+  };
 
   return (
     <div className="App">

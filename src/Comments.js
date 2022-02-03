@@ -29,6 +29,28 @@ const Comments = ({ userDataObj, setUserDataObj, getId, setId }) => {
         changeCommentRating(parentId, id, value);
     };
 
+    // Function to reply to a comment
+    const replyToComment = (e) => {
+        const newArr = [...userDataObj.comments];
+
+        // Get the nearest root comment
+        const rootComment = newArr.find(comment => comment.id == e.target.dataset.parentId || comment.id == e.target.dataset.id);
+        
+        const replyComment = {
+            id: getId() + 1,
+            content: "[TEST REPLY]",
+            createdAt: "Just Now",
+            replies: [],
+            score: 0,
+            replyingTo: e.target.dataset.commentUser,
+            user: {image: {png: juliusomoProfileImg, webp: juliusomoProfileImg}, username: "juliusomo"},
+        };
+        
+        // Append the new reply to the root comment
+        rootComment.replies.push(replyComment);
+        setUserDataObj({...userDataObj, comments: newArr});
+    };
+
     // Object to store the profile image URLs
     const profileImages = {
         amyrobson: amyrobsonProfileImg,
@@ -45,6 +67,7 @@ const Comments = ({ userDataObj, setUserDataObj, getId, setId }) => {
                     <div key={ comment.id } className="comment-content-wrapper">
                         <Comment
                             commentType={ "root-comment" }
+                            parentId={ null }
                             id={ comment.id }
                             score={ comment.score }
                             username={ comment.user.username }
@@ -53,6 +76,7 @@ const Comments = ({ userDataObj, setUserDataObj, getId, setId }) => {
                             content={ comment.content }
                             upvote={ upvote }
                             downvote={ downvote }
+                            replyToComment={ replyToComment }
                         />
 
                         {
@@ -76,6 +100,7 @@ const Comments = ({ userDataObj, setUserDataObj, getId, setId }) => {
                                         replyingTo={ reply.replyingTo }
                                         upvote={ upvote } 
                                         downvote={ downvote }
+                                        replyToComment={ replyToComment }
                                     />
 
                                     {
