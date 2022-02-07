@@ -4,8 +4,13 @@ import amyrobsonProfileImg from  "./images/avatars/image-amyrobson.png";
 import maxblagunProfileImg from "./images/avatars/image-maxblagun.png";
 import ramsesmironProfileImg from "./images/avatars/image-ramsesmiron.png";
 import juliusomoProfileImg from "./images/avatars/image-juliusomo.png";
+import Post from "./Post";
+import { useState } from "react";
 
 const Comments = ({ userDataObj, setUserDataObj, getId, setId }) => {
+    // State to manage whether a comment is currently being replied to
+    const [isReplying, setIsReplying] = useState([]);
+
     // Function to set the user state when a comment rating is changed
     const changeCommentRating = (parentId, id, value) => {
         const newArr = [...userDataObj.comments];
@@ -31,24 +36,12 @@ const Comments = ({ userDataObj, setUserDataObj, getId, setId }) => {
 
     // Function to reply to a comment
     const replyToComment = (e) => {
-        const newArr = [...userDataObj.comments];
+        const replyingTo = e.target.dataset.commentUser;
+        console.log(`Comments.js replyingTo:`, replyingTo);
 
-        // Get the nearest root comment
-        const rootComment = newArr.find(comment => comment.id == e.target.dataset.parentId || comment.id == e.target.dataset.id);
-        
-        const replyComment = {
-            id: getId() + 1,
-            content: "[TEST REPLY]",
-            createdAt: "Just Now",
-            replies: [],
-            score: 0,
-            replyingTo: e.target.dataset.commentUser,
-            user: {image: {png: juliusomoProfileImg, webp: juliusomoProfileImg}, username: "juliusomo"},
-        };
-        
-        // Append the new reply to the root comment
-        rootComment.replies.push(replyComment);
-        setUserDataObj({...userDataObj, comments: newArr});
+        // Update replying state for nearest root comment (renders post component to nearest root comment)
+        isReplying[e.target.dataset.parentId ?? e.target.dataset.id] = true;
+        setIsReplying([...isReplying]);
     };
 
     // Object to store the profile image URLs
@@ -107,10 +100,26 @@ const Comments = ({ userDataObj, setUserDataObj, getId, setId }) => {
                                         // Set ID for a new comment if reply ID is max
                                         setId(Math.max(getId(), reply.id))
                                     }
+
                                 </div>
+
                             ))
                         }
-                        
+
+                        {
+                            // If user is replying under this root comment: display the post component
+                            isReplying[comment.id] && (<Post
+                                                            isReplyPost={ true }
+                                                            replyId={ comment.id }
+                                                            isReplying={ isReplying }
+                                                            setIsReplying={ setIsReplying }
+                                                            replyingTo={ null }
+                                                            userDataObj={ userDataObj }
+                                                            setUserDataObj={ setUserDataObj }
+                                                            getId={ getId }
+                                                        />)
+                        }
+
                     </div>
                 ))
             }

@@ -40,8 +40,8 @@
 }
 
 .reply-comment::before {
-    background-color: hsl(0, 0%, 80%);
     content: " ";
+    background-color: hsl(0, 0%, 80%);
     position: absolute;
     left: -13px;
     top: 0;
@@ -49,7 +49,7 @@
     height: 100%;
 }
 
-.reply-comment + .reply-comment::before {
+.reply-wrapper + .reply-wrapper > .reply-comment::before {
     top: -2rem;
     height: calc(100% + 2rem);
 }
@@ -150,4 +150,10 @@
 
 .reply > p {
     cursor: pointer;
+}
+
+@media screen and (min-width: 1000px) {
+    .reply-comment .post-wrapper {
+        width: 85%;
+    }
 }
