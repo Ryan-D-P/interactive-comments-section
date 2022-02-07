@@ -19,7 +19,7 @@ function App() {
     <div className="App">
       <main className="main-content">
         <Comments userDataObj={ userDataObj } setUserDataObj={ setUserDataObj } getId={ getId } setId={ setId } />
-        <Post isReplyPost={ false } userDataObj={ userDataObj } setUserDataObj={ setUserDataObj } getId={ getId } />
+        <Post isReplyPost={ "" } userDataObj={ userDataObj } setUserDataObj={ setUserDataObj } getId={ getId } />
       </main>
 
       {/* <Attribution /> */}

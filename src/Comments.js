@@ -10,6 +10,8 @@ import { useState } from "react";
 const Comments = ({ userDataObj, setUserDataObj, getId, setId }) => {
     // State to manage whether a comment is currently being replied to
     const [isReplying, setIsReplying] = useState([]);
+    // State to manage the replyingTo username (the comment being replied to) for a root comment
+    const [replyingToUsername, setReplyingToUsername] = useState([]);
 
     // Function to set the user state when a comment rating is changed
     const changeCommentRating = (parentId, id, value) => {
@@ -36,8 +38,9 @@ const Comments = ({ userDataObj, setUserDataObj, getId, setId }) => {
 
     // Function to reply to a comment
     const replyToComment = (e) => {
-        const replyingTo = e.target.dataset.commentUser;
-        console.log(`Comments.js replyingTo:`, replyingTo);
+        // Set the replyingTo username for the root comment ID
+        replyingToUsername[e.target.dataset.parentId ?? e.target.dataset.id] = e.target.dataset.commentUser;
+        setReplyingToUsername([...replyingToUsername]);
 
         // Update replying state for nearest root comment (renders post component to nearest root comment)
         isReplying[e.target.dataset.parentId ?? e.target.dataset.id] = true;
@@ -113,7 +116,7 @@ const Comments = ({ userDataObj, setUserDataObj, getId, setId }) => {
                                                             replyId={ comment.id }
                                                             isReplying={ isReplying }
                                                             setIsReplying={ setIsReplying }
-                                                            replyingTo={ null }
+                                                            replyingTo={ replyingToUsername[comment.id] }
                                                             userDataObj={ userDataObj }
                                                             setUserDataObj={ setUserDataObj }
                                                             getId={ getId }

@@ -31,10 +31,10 @@ const Post = ({ isReplyPost, replyId, isReplying, setIsReplying, replyingTo, use
         // Get the nearest root comment
         const rootComment = newArr.find(comment => comment.id === replyId);
         
+        // Set the replyingTo username for the reply comment
         postedComment.replyingTo = replyingTo;
-        console.log(`Post.js prop replyingTo:`, replyingTo);
 
-        // Append the new reply to the root comment
+        // Append the new reply comment to the root comment
         rootComment.replies.push(postedComment);
         setUserDataObj({...userDataObj, comments: newArr});
 
@@ -44,7 +44,7 @@ const Post = ({ isReplyPost, replyId, isReplying, setIsReplying, replyingTo, use
     };
 
     return (
-        <div className={ `Post ${isReplyPost && "reply-comment"}` }>
+        <div className={ `Post${isReplyPost && " reply-comment"}` }>
             <div className="post-wrapper">
                 <div className="post-profileimg">
                     <img src={ juliusomoProfileImg } alt="user profile" />
