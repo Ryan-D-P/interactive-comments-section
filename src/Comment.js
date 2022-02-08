@@ -7,7 +7,7 @@ import editIcon from "./images/icon-edit.svg";
 import deleteIcon from "./images/icon-delete.svg";
 import { useState } from "react";
 
-const Comment = ({ commentType, parentId, id, score, username, currentUser, profileImg, createdAt, content, replyingTo, upvote, downvote, replyToComment }) => {
+const Comment = ({ commentType, parentId, id, score, username, currentUser, profileImg, createdAt, content, replyingTo, upvote, downvote, replyToComment, deleteComment, editComment }) => {
     // Manage the state for active upvote/downvote ratings for a comment
     const [upvoteState, setUpvoteState] = useState({active: false, src: plus});
     const [downvoteState, setDownvoteState] = useState({active: false, src: minus});
@@ -68,11 +68,11 @@ const Comment = ({ commentType, parentId, id, score, username, currentUser, prof
                 {
                     username === currentUser.username && (
                         <div className="actions-wrapper">
-                            <div className="delete" data-parent-id={ parentId } data-id={ id } data-comment-user={ username } onClick={ (e) => console.log(e) }>
+                            <div className="delete" data-parent-id={ parentId } data-id={ id } data-comment-user={ username } onClick={ (e) => deleteComment(e) }>
                                 <img src={ deleteIcon } alt="delete" />
                                 <p>Delete</p>
                             </div>
-                            <div className="edit" data-parent-id={ parentId } data-id={ id } data-comment-user={ username } onClick={ (e) => console.log(e) }>
+                            <div className="edit" data-parent-id={ parentId } data-id={ id } data-comment-user={ username } onClick={ (e) => editComment(e) }>
                                 <img src={ editIcon } alt="edit" />
                                 <p>Edit</p>
                             </div>
