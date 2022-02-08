@@ -2,6 +2,10 @@ import Attribution from './Attribution';
 import Comments from './Comments';
 import Post from './Post';
 import data from "./data.json";
+import amyrobsonProfileImg from  "./images/avatars/image-amyrobson.png";
+import maxblagunProfileImg from "./images/avatars/image-maxblagun.png";
+import ramsesmironProfileImg from "./images/avatars/image-ramsesmiron.png";
+import juliusomoProfileImg from "./images/avatars/image-juliusomo.png";
 import { useState } from "react";
 
 function App() {
@@ -14,12 +18,19 @@ function App() {
     newId = value;
     return null;
   };
+  // Object to store the profile image URLs
+  const profileImages = {
+    amyrobson: amyrobsonProfileImg,
+    maxblagun: maxblagunProfileImg,
+    ramsesmiron: ramsesmironProfileImg,
+    juliusomo: juliusomoProfileImg,
+  };
 
   return (
     <div className="App">
       <main className="main-content">
-        <Comments userDataObj={ userDataObj } setUserDataObj={ setUserDataObj } getId={ getId } setId={ setId } />
-        <Post isReplyPost={ "" } userDataObj={ userDataObj } setUserDataObj={ setUserDataObj } getId={ getId } />
+        <Comments userDataObj={ userDataObj } setUserDataObj={ setUserDataObj } getId={ getId } setId={ setId } profileImages={ profileImages } />
+        <Post isReplyPost={ "" } userDataObj={ userDataObj } setUserDataObj={ setUserDataObj } getId={ getId } profileImages={ profileImages } buttonText={ "SEND" } />
       </main>
 
       {/* <Attribution /> */}

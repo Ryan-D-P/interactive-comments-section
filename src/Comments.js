@@ -1,29 +1,30 @@
 import "./Comments.css";
 import Comment from "./Comment";
-import amyrobsonProfileImg from  "./images/avatars/image-amyrobson.png";
-import maxblagunProfileImg from "./images/avatars/image-maxblagun.png";
-import ramsesmironProfileImg from "./images/avatars/image-ramsesmiron.png";
-import juliusomoProfileImg from "./images/avatars/image-juliusomo.png";
 import Post from "./Post";
 import { useState } from "react";
 
-const Comments = ({ userDataObj, setUserDataObj, getId, setId }) => {
+const Comments = ({ userDataObj, setUserDataObj, getId, setId, profileImages }) => {
     // State to manage whether a comment is currently being replied to
     const [isReplying, setIsReplying] = useState([]);
     // State to manage the replyingTo username (the comment being replied to) for a root comment
     const [replyingToUsername, setReplyingToUsername] = useState([]);
 
-    // Function to set the user state when a comment rating is changed
-    const changeCommentRating = (parentId, id, value) => {
-        const newArr = [...userDataObj.comments];
+    // Get the root comment nearest to the passed comment id (parentId and/or id)
+    const getNearestRootComment = (parentId, id) => userDataObj.comments.find(comment => comment.id === parentId || comment.id === id);
 
-        // Get the nearest root comment
-        const rootComment = newArr.find(comment => comment.id === parentId || comment.id === id);
-        // If root comment has replies: comment to change is a reply comment; else it's a root comment
-        const targetComment = rootComment.replies?.find(reply => reply.id === id) || rootComment;
+    // Get a user comment by the comment id (parentId and/or id)
+    const getCommentById = (parentId, id) => {
+        const rootComment = getNearestRootComment(parentId, id);
+        // If root comment has replies: comment to return is a reply comment; else it's a root comment
+        return rootComment.replies.find(reply => reply.id === id) ?? rootComment;
+    };
+
+    // Function to set the userDataObj state when a comment rating is changed
+    const changeCommentRating = (parentId, id, value) => {
+        const targetComment = getCommentById(parentId, id);
         targetComment.score += value;
 
-        setUserDataObj({...userDataObj, comments: newArr});
+        setUserDataObj({...userDataObj, comments: [...userDataObj.comments]});
     };
 
     // Functions to update the state when a comment is upvoted/downvoted
@@ -38,21 +39,34 @@ const Comments = ({ userDataObj, setUserDataObj, getId, setId }) => {
 
     // Function to reply to a comment
     const replyToComment = (e) => {
+        const target = e.target.dataset.commentUser ? e.target : e.target.parentElement;
+
         // Set the replyingTo username for the root comment ID
-        replyingToUsername[e.target.dataset.parentId ?? e.target.dataset.id] = e.target.dataset.commentUser;
+        replyingToUsername[target.dataset.parentId ?? target.dataset.id] = target.dataset.commentUser;
         setReplyingToUsername([...replyingToUsername]);
 
         // Update replying state for nearest root comment (renders post component to nearest root comment)
-        isReplying[e.target.dataset.parentId ?? e.target.dataset.id] = true;
+        isReplying[target.dataset.parentId ?? target.dataset.id] = true;
         setIsReplying([...isReplying]);
     };
 
-    // Object to store the profile image URLs
-    const profileImages = {
-        amyrobson: amyrobsonProfileImg,
-        maxblagun: maxblagunProfileImg,
-        ramsesmiron: ramsesmironProfileImg,
-        juliusomo: juliusomoProfileImg,
+    // Function to delete a comment posted by current user
+    const deleteComment = (e) => {
+        const target = e.target.dataset.commentUser ? e.target : e.target.parentElement;
+        
+        const targetComment = getCommentById(Number(target.dataset.parentId), Number(target.dataset.id));
+        const rootComment = getNearestRootComment(Number(target.dataset.parentId), Number(target.dataset.id));
+
+        // Filter the array of root comments/reply comments to exclude the deleted comment
+        if (target.dataset.parentId) rootComment.replies = rootComment.replies.filter(reply => reply.id !== targetComment.id);
+        else userDataObj.comments = userDataObj.comments.filter(comment => comment.id !== targetComment.id);
+
+        setUserDataObj({...userDataObj, comments: [...userDataObj.comments]});
+    };
+
+    // Function to edit a comment posted by current user
+    const editComment = (e) => {
+        const target = e.target.dataset.commentUser ? e.target : e.target.parentElement;
     };
 
     return (
@@ -67,16 +81,19 @@ const Comments = ({ userDataObj, setUserDataObj, getId, setId }) => {
                             id={ comment.id }
                             score={ comment.score }
                             username={ comment.user.username }
+                            currentUser={ userDataObj.currentUser }
                             profileImg={ profileImages[comment.user.username] }
                             createdAt={ comment.createdAt }
                             content={ comment.content }
                             upvote={ upvote }
                             downvote={ downvote }
                             replyToComment={ replyToComment }
+                            deleteComment={ deleteComment }
+                            editComment={ editComment }
                         />
 
                         {
-                            // Set ID for a new comment if root ID is max
+                            // Set a new ID for a new comment if root ID is max
                             setId(Math.max(getId(), comment.id))
                         }
 
@@ -90,6 +107,7 @@ const Comments = ({ userDataObj, setUserDataObj, getId, setId }) => {
                                         id={ reply.id }
                                         score={ reply.score } 
                                         username={ reply.user.username } 
+                                        currentUser={ userDataObj.currentUser }
                                         profileImg={ profileImages[reply.user.username] } 
                                         createdAt={ reply.createdAt } 
                                         content={ reply.content }
@@ -97,10 +115,12 @@ const Comments = ({ userDataObj, setUserDataObj, getId, setId }) => {
                                         upvote={ upvote } 
                                         downvote={ downvote }
                                         replyToComment={ replyToComment }
+                                        deleteComment={ deleteComment }
+                                        editComment={ editComment }
                                     />
 
                                     {
-                                        // Set ID for a new comment if reply ID is max
+                                        // Set a new ID for a new comment if reply ID is max
                                         setId(Math.max(getId(), reply.id))
                                     }
 
@@ -120,6 +140,8 @@ const Comments = ({ userDataObj, setUserDataObj, getId, setId }) => {
                                                             userDataObj={ userDataObj }
                                                             setUserDataObj={ setUserDataObj }
                                                             getId={ getId }
+                                                            profileImages={ profileImages }
+                                                            buttonText={ "REPLY" }
                                                         />)
                         }
 
