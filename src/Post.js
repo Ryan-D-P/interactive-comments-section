@@ -4,7 +4,7 @@ import maxblagunProfileImg from "./images/avatars/image-maxblagun.png";
 import ramsesmironProfileImg from "./images/avatars/image-ramsesmiron.png";
 import juliusomoProfileImg from "./images/avatars/image-juliusomo.png";
 
-const Post = ({ isReplyPost, replyId, isReplying, setIsReplying, replyingTo, userDataObj, setUserDataObj, getId }) => {
+const Post = ({ isReplyPost, replyId, isReplying, setIsReplying, replyingTo, userDataObj, setUserDataObj, getId, profileImages, buttonText }) => {
     // Submit event function to post a new comment
     const sendComment = (e) => {
         e.preventDefault();
@@ -47,14 +47,14 @@ const Post = ({ isReplyPost, replyId, isReplying, setIsReplying, replyingTo, use
         <div className={ `Post${isReplyPost && " reply-comment"}` }>
             <div className="post-wrapper">
                 <div className="post-profileimg">
-                    <img src={ juliusomoProfileImg } alt="user profile" />
+                    <img src={ profileImages[userDataObj.currentUser.username] } alt="user profile" />
                 </div>
                 <form onSubmit={ (e) => sendComment(e) }>
                     <div className="post-body">
                         <textarea name="user-comment" placeholder="Add a comment..." maxLength="800" rows="3" cols="150" required></textarea>
                     </div>
                     <div className="post-submit">
-                            <button type="submit">SEND</button>
+                            <button type="submit">{ buttonText }</button>
                     </div>
                 </form>
             </div>
