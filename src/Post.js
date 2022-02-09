@@ -4,7 +4,7 @@ import maxblagunProfileImg from "./images/avatars/image-maxblagun.png";
 import ramsesmironProfileImg from "./images/avatars/image-ramsesmiron.png";
 import juliusomoProfileImg from "./images/avatars/image-juliusomo.png";
 
-const Post = ({ isReplyPost, replyId, isReplying, setIsReplying, replyingTo, userDataObj, setUserDataObj, getId, profileImages, buttonText }) => {
+const Post = ({ isReplyPost, replyId, isReplying, setIsReplying, replyingTo, userDataObj, setUserDataObj, getId, currentUserImg, buttonText }) => {
     // Submit event function to post a new comment
     const sendComment = (e) => {
         e.preventDefault();
@@ -47,7 +47,7 @@ const Post = ({ isReplyPost, replyId, isReplying, setIsReplying, replyingTo, use
         <div className={ `Post${isReplyPost && " reply-comment"}` }>
             <div className="post-wrapper">
                 <div className="post-profileimg">
-                    <img src={ profileImages[userDataObj.currentUser.username] } alt="user profile" />
+                    <img src={ currentUserImg } alt="user profile" />
                 </div>
                 <form onSubmit={ (e) => sendComment(e) }>
                     <div className="post-body">

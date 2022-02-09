@@ -30,7 +30,14 @@ function App() {
     <div className="App">
       <main className="main-content">
         <Comments userDataObj={ userDataObj } setUserDataObj={ setUserDataObj } getId={ getId } setId={ setId } profileImages={ profileImages } />
-        <Post isReplyPost={ "" } userDataObj={ userDataObj } setUserDataObj={ setUserDataObj } getId={ getId } profileImages={ profileImages } buttonText={ "SEND" } />
+        <Post
+          isReplyPost={ "" }
+          userDataObj={ userDataObj }
+          setUserDataObj={ setUserDataObj }
+          getId={ getId }
+          currentUserImg={ profileImages[userDataObj.currentUser.username] }
+          buttonText={ "SEND" } 
+        />
       </main>
 
       {/* <Attribution /> */}

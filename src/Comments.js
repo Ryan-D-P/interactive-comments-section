@@ -65,8 +65,12 @@ const Comments = ({ userDataObj, setUserDataObj, getId, setId, profileImages }) 
     };
 
     // Function to edit a comment posted by current user
-    const editComment = (e) => {
+    const editComment = (e, content, postComponent) => {
         const target = e.target.dataset.commentUser ? e.target : e.target.parentElement;
+
+        console.log(postComponent);
+
+
     };
 
     return (
@@ -140,7 +144,7 @@ const Comments = ({ userDataObj, setUserDataObj, getId, setId, profileImages }) 
                                                             userDataObj={ userDataObj }
                                                             setUserDataObj={ setUserDataObj }
                                                             getId={ getId }
-                                                            profileImages={ profileImages }
+                                                            currentUserImg={ profileImages[userDataObj.currentUser.username] }
                                                             buttonText={ "REPLY" }
                                                         />)
                         }
