@@ -8,7 +8,7 @@ import editIcon from "./images/icon-edit.svg";
 import deleteIcon from "./images/icon-delete.svg";
 import { useState } from "react";
 
-const Comment = ({ commentType, parentId, id, score, username, currentUser, profileImg, createdAt, content, replyingTo, upvote, downvote, replyToComment, deleteComment, editComment }) => {
+const Comment = ({ commentType, parentId, id, score, username, currentUser, profileImg, createdAt, content, replyingTo, upvote, downvote, replyToComment, deleteComment, userDataObj, setUserDataObj, getCommentById }) => {
     // Manage the state for active upvote/downvote ratings for a comment
     const [upvoteState, setUpvoteState] = useState({active: false, src: plus});
     const [downvoteState, setDownvoteState] = useState({active: false, src: minus});
@@ -17,7 +17,22 @@ const Comment = ({ commentType, parentId, id, score, username, currentUser, prof
     const [isEdit, setIsEdit] = useState(false);
 
     // If this comment is being edited: render a Post component
-    if (isEdit) return <Post inputValue={ content } isReplyPost={ parentId ? true : "" } currentUserImg={ profileImg } buttonText={ "UPDATE" } />
+    if (isEdit) {
+        return (
+            <Post
+                inputValue={ content }
+                isReplyPost={ parentId ? true : "" }
+                userDataObj={ userDataObj }
+                setUserDataObj={ setUserDataObj }
+                setIsEdit={ setIsEdit }
+                parentId={ parentId }
+                id={ id }
+                getCommentById={ getCommentById }
+                currentUserImg={ profileImg }
+                buttonText={ "UPDATE" } 
+            />
+        );
+    }
 
     // Else render a Comment component
     return (

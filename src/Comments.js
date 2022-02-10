@@ -3,7 +3,7 @@ import Comment from "./Comment";
 import Post from "./Post";
 import { useState } from "react";
 
-const Comments = ({ userDataObj, setUserDataObj, getId, setId, profileImages }) => {
+const Comments = ({ userDataObj, setUserDataObj, getNewId, setNewId, profileImages }) => {
     // State to manage whether a comment is currently being replied to
     const [isReplying, setIsReplying] = useState([]);
     // State to manage the replyingTo username (the comment being replied to) for a root comment
@@ -64,12 +64,6 @@ const Comments = ({ userDataObj, setUserDataObj, getId, setId, profileImages }) 
         setUserDataObj({...userDataObj, comments: [...userDataObj.comments]});
     };
 
-    // Function to edit a comment posted by current user
-    const editComment = (e) => {
-        const target = e.target.dataset.commentUser ? e.target : e.target.parentElement;
-        
-    };
-
     return (
         <div className="Comments">
             {
@@ -90,12 +84,14 @@ const Comments = ({ userDataObj, setUserDataObj, getId, setId, profileImages }) 
                             downvote={ downvote }
                             replyToComment={ replyToComment }
                             deleteComment={ deleteComment }
-                            editComment={ editComment }
+                            userDataObj={ userDataObj }
+                            setUserDataObj={ setUserDataObj }
+                            getCommentById={ getCommentById }
                         />
 
                         {
                             // Set a new ID for a new comment if root ID is max
-                            setId(Math.max(getId(), comment.id))
+                            setNewId(Math.max(getNewId(), comment.id))
                         }
 
                         {
@@ -117,12 +113,14 @@ const Comments = ({ userDataObj, setUserDataObj, getId, setId, profileImages }) 
                                         downvote={ downvote }
                                         replyToComment={ replyToComment }
                                         deleteComment={ deleteComment }
-                                        editComment={ editComment }
+                                        userDataObj={ userDataObj }
+                                        setUserDataObj={ setUserDataObj }
+                                        getCommentById={ getCommentById }
                                     />
 
                                     {
                                         // Set a new ID for a new comment if reply ID is max
-                                        setId(Math.max(getId(), reply.id))
+                                        setNewId(Math.max(getNewId(), reply.id))
                                     }
 
                                 </div>
@@ -141,7 +139,7 @@ const Comments = ({ userDataObj, setUserDataObj, getId, setId, profileImages }) 
                                                             replyingTo={ replyingToUsername[comment.id] }
                                                             userDataObj={ userDataObj }
                                                             setUserDataObj={ setUserDataObj }
-                                                            getId={ getId }
+                                                            getNewId={ getNewId }
                                                             currentUserImg={ profileImages[userDataObj.currentUser.username] }
                                                             buttonText={ "REPLY" }
                                                         />)

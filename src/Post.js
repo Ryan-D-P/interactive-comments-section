@@ -4,14 +4,25 @@ import maxblagunProfileImg from "./images/avatars/image-maxblagun.png";
 import ramsesmironProfileImg from "./images/avatars/image-ramsesmiron.png";
 import juliusomoProfileImg from "./images/avatars/image-juliusomo.png";
 
-const Post = ({ inputValue, isReplyPost, replyId, isReplying, setIsReplying, replyingTo, userDataObj, setUserDataObj, getId, currentUserImg, buttonText }) => {
+const Post = ({ inputValue, isReplyPost, replyId, isReplying, setIsReplying, replyingTo, userDataObj, setUserDataObj, setIsEdit, parentId, id, getCommentById, getNewId, currentUserImg, buttonText }) => {
     // Submit event function to post a new comment
     const sendComment = (e) => {
         e.preventDefault();
 
+        // If comment being sent is from an edit Post component
+        if (setIsEdit) {
+            // Change the content property value of the comment obj to the edit Post input value
+            getCommentById(parentId, id).content = e.target[0].value;
+
+            setUserDataObj({...userDataObj});
+            setIsEdit(false);
+            
+            return;
+        }
+
         // Create object for the newly posted comment
         const postedComment = {
-            id: getId() + 1,
+            id: getNewId() + 1,
             content: e.target[0].value,
             createdAt: "Just Now",
             score: 0,
@@ -38,7 +49,7 @@ const Post = ({ inputValue, isReplyPost, replyId, isReplying, setIsReplying, rep
         rootComment.replies.push(postedComment);
         setUserDataObj({...userDataObj, comments: newArr});
 
-        // Update replying state for nearest root comment (unmounts post component to nearest root comment)
+        // Update replying state for nearest root comment (unmounts post component at nearest root comment)
         isReplying[replyId] = false;
         setIsReplying([...isReplying]);
     };
@@ -51,7 +62,7 @@ const Post = ({ inputValue, isReplyPost, replyId, isReplying, setIsReplying, rep
                 </div>
                 <form onSubmit={ (e) => sendComment(e) }>
                     <div className="post-body">
-                        <textarea name="user-comment" placeholder="Add a comment..." maxLength="800" rows="3" cols="150" required>{ inputValue }</textarea>
+                        <textarea name="user-comment" placeholder="Add a comment..." defaultValue={ inputValue } maxLength="800" rows="3" cols="150" required></textarea>
                     </div>
                     <div className="post-submit">
                             <button type="submit">{ buttonText }</button>

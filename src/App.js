@@ -13,8 +13,8 @@ function App() {
   const [userDataObj, setUserDataObj] = useState(data);
   // Stores the ID for a newly posted comment
   let newId = 1;
-  const getId = () => newId;
-  const setId = (value) => {
+  const getNewId = () => newId;
+  const setNewId = (value) => {
     newId = value;
     return null;
   };
@@ -29,13 +29,13 @@ function App() {
   return (
     <div className="App">
       <main className="main-content">
-        <Comments userDataObj={ userDataObj } setUserDataObj={ setUserDataObj } getId={ getId } setId={ setId } profileImages={ profileImages } />
+        <Comments userDataObj={ userDataObj } setUserDataObj={ setUserDataObj } getNewId={ getNewId } setNewId={ setNewId } profileImages={ profileImages } />
         <Post
           inputValue={ "" }
           isReplyPost={ "" }
           userDataObj={ userDataObj }
           setUserDataObj={ setUserDataObj }
-          getId={ getId }
+          getNewId={ getNewId }
           currentUserImg={ profileImages[userDataObj.currentUser.username] }
           buttonText={ "SEND" } 
         />
