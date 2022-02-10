@@ -87,6 +87,7 @@
 .post-submit > button {
     background-color: hsl(280, 50%, 40%);
     color: hsl(0, 0%, 100%);
+    font-weight: 700;
     display: flex;
     justify-content: center;
     align-items: center;

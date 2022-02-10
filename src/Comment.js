@@ -1,3 +1,4 @@
+import Post from "./Post";
 import plus from "./images/icon-plus.svg";
 import minus from "./images/icon-minus.svg";
 import activePlus from "./images/icon-plus-active.svg";
@@ -7,11 +8,33 @@ import editIcon from "./images/icon-edit.svg";
 import deleteIcon from "./images/icon-delete.svg";
 import { useState } from "react";
 
-const Comment = ({ commentType, parentId, id, score, username, currentUser, profileImg, createdAt, content, replyingTo, upvote, downvote, replyToComment, deleteComment, editComment }) => {
+const Comment = ({ commentType, parentId, id, score, username, currentUser, profileImg, createdAt, content, replyingTo, upvote, downvote, replyToComment, deleteComment, userDataObj, setUserDataObj, getCommentById }) => {
     // Manage the state for active upvote/downvote ratings for a comment
     const [upvoteState, setUpvoteState] = useState({active: false, src: plus});
     const [downvoteState, setDownvoteState] = useState({active: false, src: minus});
 
+    // State to manage whether current comment is being edited by current user
+    const [isEdit, setIsEdit] = useState(false);
+
+    // If this comment is being edited: render a Post component
+    if (isEdit) {
+        return (
+            <Post
+                inputValue={ content }
+                isReplyPost={ parentId ? true : "" }
+                userDataObj={ userDataObj }
+                setUserDataObj={ setUserDataObj }
+                setIsEdit={ setIsEdit }
+                parentId={ parentId }
+                id={ id }
+                getCommentById={ getCommentById }
+                currentUserImg={ profileImg }
+                buttonText={ "UPDATE" } 
+            />
+        );
+    }
+
+    // Else render a Comment component
     return (
         <div className={ `comment ${commentType}` }>
             <div className="comment-ratings-wrapper">
@@ -72,7 +95,7 @@ const Comment = ({ commentType, parentId, id, score, username, currentUser, prof
                                 <img src={ deleteIcon } alt="delete" />
                                 <p>Delete</p>
                             </div>
-                            <div className="edit" data-parent-id={ parentId } data-id={ id } data-comment-user={ username } onClick={ (e) => editComment(e) }>
+                            <div className="edit" data-parent-id={ parentId } data-id={ id } data-comment-user={ username } onClick={ (e) => setIsEdit(true) }>
                                 <img src={ editIcon } alt="edit" />
                                 <p>Edit</p>
                             </div>
