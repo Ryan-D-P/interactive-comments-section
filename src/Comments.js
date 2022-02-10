@@ -65,12 +65,9 @@ const Comments = ({ userDataObj, setUserDataObj, getId, setId, profileImages }) 
     };
 
     // Function to edit a comment posted by current user
-    const editComment = (e, content, postComponent) => {
+    const editComment = (e) => {
         const target = e.target.dataset.commentUser ? e.target : e.target.parentElement;
-
-        console.log(postComponent);
-
-
+        
     };
 
     return (
@@ -136,6 +133,7 @@ const Comments = ({ userDataObj, setUserDataObj, getId, setId, profileImages }) 
                         {
                             // If user is replying under this root comment: display the post component
                             isReplying[comment.id] && (<Post
+                                                            inputValue={ "" }
                                                             isReplyPost={ true }
                                                             replyId={ comment.id }
                                                             isReplying={ isReplying }

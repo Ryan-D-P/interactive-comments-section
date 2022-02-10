@@ -31,6 +31,7 @@ function App() {
       <main className="main-content">
         <Comments userDataObj={ userDataObj } setUserDataObj={ setUserDataObj } getId={ getId } setId={ setId } profileImages={ profileImages } />
         <Post
+          inputValue={ "" }
           isReplyPost={ "" }
           userDataObj={ userDataObj }
           setUserDataObj={ setUserDataObj }
