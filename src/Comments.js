@@ -24,7 +24,10 @@ const Comments = ({ userDataObj, setUserDataObj, getNewId, setNewId, profileImag
         const targetComment = getCommentById(parentId, id);
         targetComment.score += value;
 
-        setUserDataObj({...userDataObj, comments: [...userDataObj.comments]});
+        // Set the user data state and set the localStorage
+        const newUserData = {...userDataObj, comments: [...userDataObj.comments]};
+        localStorage.setItem(`userDataObj`, JSON.stringify(newUserData));
+        setUserDataObj(newUserData);
     };
 
     // Functions to update the state when a comment is upvoted/downvoted
@@ -61,7 +64,10 @@ const Comments = ({ userDataObj, setUserDataObj, getNewId, setNewId, profileImag
         if (target.dataset.parentId) rootComment.replies = rootComment.replies.filter(reply => reply.id !== targetComment.id);
         else userDataObj.comments = userDataObj.comments.filter(comment => comment.id !== targetComment.id);
 
-        setUserDataObj({...userDataObj, comments: [...userDataObj.comments]});
+        // Set the user data state and set the localStorage
+        const newUserData = {...userDataObj, comments: [...userDataObj.comments]};
+        localStorage.setItem(`userDataObj`, JSON.stringify(newUserData));
+        setUserDataObj(newUserData);
     };
 
     return (

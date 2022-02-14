@@ -14,7 +14,10 @@ const Post = ({ inputValue, isReplyPost, replyId, isReplying, setIsReplying, rep
             // Change the content property value of the comment obj to the edit Post input value
             getCommentById(parentId, id).content = e.target[0].value;
 
-            setUserDataObj({...userDataObj});
+            // Set the user data state and set the localStorage
+            const newUserData = {...userDataObj};
+            localStorage.setItem(`userDataObj`, JSON.stringify(newUserData));
+            setUserDataObj(newUserData);
             setIsEdit(false);
             
             return;
@@ -32,8 +35,12 @@ const Post = ({ inputValue, isReplyPost, replyId, isReplying, setIsReplying, rep
         // If newly posted comment is a root comment
         if (!isReplyPost) {
             postedComment.replies = [];
-            // Add the newly posted comment to the user data state
-            setUserDataObj({...userDataObj, comments: [...userDataObj.comments, postedComment]});
+
+            // Set the user data state and set the localStorage
+            const newUserData = {...userDataObj, comments: [...userDataObj.comments, postedComment]};
+            localStorage.setItem(`userDataObj`, JSON.stringify(newUserData));
+            setUserDataObj(newUserData);
+
             e.target[0].value = "";
             return;
         }
@@ -44,10 +51,13 @@ const Post = ({ inputValue, isReplyPost, replyId, isReplying, setIsReplying, rep
         
         // Set the replyingTo username for the reply comment
         postedComment.replyingTo = replyingTo;
-
         // Append the new reply comment to the root comment
         rootComment.replies.push(postedComment);
-        setUserDataObj({...userDataObj, comments: newArr});
+
+        // Set the user data state and set the localStorage
+        const newUserData = {...userDataObj, comments: newArr};
+        localStorage.setItem(`userDataObj`, JSON.stringify(newUserData));
+        setUserDataObj(newUserData);
 
         // Update replying state for nearest root comment (unmounts post component at nearest root comment)
         isReplying[replyId] = false;
