@@ -23,7 +23,7 @@ body {
 
 @media screen and (min-width: 1000px) {
   body {
-    padding: 1rem 40rem 0rem;
+    padding: 1rem 30rem;
   }
 }
 
@@ -43,7 +43,9 @@ img {
 }
 
 .Attribution {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
+  margin-top: 20px;
+}
+
+.Attribution, .Attribution > a {
+  font-size: 1.2rem;
 }

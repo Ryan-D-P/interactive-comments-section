@@ -40,9 +40,9 @@ function App() {
           buttonText={ "SEND" } 
         />
       </main>
-
-      {/* <Attribution /> */}
-
+      <footer className="footer-content">
+        <Attribution />
+      </footer>
     </div>
   );
 }
