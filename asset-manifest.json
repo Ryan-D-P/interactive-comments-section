@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/interactive-comments-section/static/css/main.3990032c.css",
+    "main.js": "/interactive-comments-section/static/js/main.e8fd65eb.js",
+    "index.html": "/interactive-comments-section/index.html",
+    "static/media/icon-plus-active.svg": "/interactive-comments-section/static/media/icon-plus-active.f0d80474fde92844a5e3c4a7d9653694.svg",
+    "static/media/icon-plus.svg": "/interactive-comments-section/static/media/icon-plus.0037a825a550965779412c2890bd328b.svg",
+    "static/media/icon-edit.svg": "/interactive-comments-section/static/media/icon-edit.b0c7f9ebaec367bd3ae2539df8b55ff9.svg",
+    "static/media/icon-reply.svg": "/interactive-comments-section/static/media/icon-reply.bfb4589d45cd96abd45e3b82f7e7bbc6.svg",
+    "static/media/icon-minus-active.svg": "/interactive-comments-section/static/media/icon-minus-active.cf518aaf575fc1d00d8e7de96b7115ac.svg",
+    "static/media/icon-minus.svg": "/interactive-comments-section/static/media/icon-minus.4aa6933cb1575b3c54fa67d84a61efaf.svg",
+    "static/media/icon-delete.svg": "/interactive-comments-section/static/media/icon-delete.86cedbf2e37529f9c8f1f744254059b0.svg",
+    "main.3990032c.css.map": "/interactive-comments-section/static/css/main.3990032c.css.map",
+    "main.e8fd65eb.js.map": "/interactive-comments-section/static/js/main.e8fd65eb.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3990032c.css",
+    "static/js/main.e8fd65eb.js"
+  ]
+}
