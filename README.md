@@ -31,7 +31,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Solution URL: [https://www.frontendmentor.io/solutions/mobilefirst-interactive-comments-section-using-react-hRiZ3NB1I](https://www.frontendmentor.io/solutions/mobilefirst-interactive-comments-section-using-react-hRiZ3NB1I)
 - Live Site URL: [https://ryan-d-p.github.io/interactive-comments-section/](https://ryan-d-p.github.io/interactive-comments-section/)
 
 ## My process
