@@ -32,7 +32,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://ryan-d-p.github.io/interactive-comments-section/)
+- Live Site URL: [https://ryan-d-p.github.io/interactive-comments-section/](https://ryan-d-p.github.io/interactive-comments-section/)
 
 ## My process
 
@@ -45,5 +45,5 @@ Users should be able to:
 
 ## Author
 
-- Website - [Add your name here](https://github.com/Ryan-D-P)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/Ryan-D-P)
+- Website - [Ryan-D-P](https://github.com/Ryan-D-P)
+- Frontend Mentor - [@Ryan-D-P](https://www.frontendmentor.io/profile/Ryan-D-P)
