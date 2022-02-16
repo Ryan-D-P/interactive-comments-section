@@ -6,12 +6,21 @@ import activeMinus from "./images/icon-minus-active.svg";
 import replyIcon from "./images/icon-reply.svg"
 import editIcon from "./images/icon-edit.svg";
 import deleteIcon from "./images/icon-delete.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Comment = ({ commentType, parentId, id, score, username, currentUser, profileImg, createdAt, content, replyingTo, upvote, downvote, replyToComment, deleteComment, userDataObj, setUserDataObj, getCommentById }) => {
     // Manage the state for active upvote/downvote ratings for a comment
     const [upvoteState, setUpvoteState] = useState({active: false, src: plus});
     const [downvoteState, setDownvoteState] = useState({active: false, src: minus});
+
+    // Try to get upvote/downvote active states from localStorage
+    useEffect(() => {
+        const localArrowState = JSON.parse(localStorage.getItem(`comment${id}ArrowState`));
+        if (localArrowState) {
+            setUpvoteState(localArrowState.up);
+            setDownvoteState(localArrowState.down);
+        }
+    }, []);
 
     // State to manage whether current comment is being edited by current user
     const [isEdit, setIsEdit] = useState(false);
@@ -41,12 +50,14 @@ const Comment = ({ commentType, parentId, id, score, username, currentUser, prof
                 <div className="comment-ratings">
                     <div className="rating-plus">
                         <img
-                            src={ upvoteState.src }
+                            src={ upvoteState.src}
                             alt="plus"
                             onClick={ () => {
                                 upvote(parentId, id, upvoteState.active, downvoteState.active);
-                                upvoteState.active ? setUpvoteState({active: false, src: plus}) : setUpvoteState({active: true, src: activePlus});
+                                const stateChange = upvoteState.active ? {active: false, src: plus} : {active: true, src: activePlus};
+                                setUpvoteState(stateChange);
                                 setDownvoteState({active: false, src: minus});
+                                localStorage.setItem(`comment${id}ArrowState`, JSON.stringify({up: stateChange, down: {active: false, src: minus}}));
                             } }
                         />
                     </div>
@@ -59,8 +70,10 @@ const Comment = ({ commentType, parentId, id, score, username, currentUser, prof
                             alt="minus"
                             onClick={ () => {
                                 downvote(parentId, id, upvoteState.active, downvoteState.active);
-                                downvoteState.active ? setDownvoteState({active: false, src: minus}) : setDownvoteState({active: true, src: activeMinus});
+                                const stateChange = downvoteState.active ? {active: false, src: minus} : {active: true, src: activeMinus};
+                                setDownvoteState(stateChange);
                                 setUpvoteState({active: false, src: plus});
+                                localStorage.setItem(`comment${id}ArrowState`, JSON.stringify({up: {active: false, src: plus}, down: stateChange}));
                             } } 
                         />
                     </div>

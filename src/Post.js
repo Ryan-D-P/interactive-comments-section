@@ -27,7 +27,7 @@ const Post = ({ inputValue, isReplyPost, replyId, isReplying, setIsReplying, rep
         const postedComment = {
             id: getNewId() + 1,
             content: e.target[0].value,
-            createdAt: "Just Now",
+            createdAt: "Just now",
             score: 0,
             user: {image: {png: juliusomoProfileImg, webp: juliusomoProfileImg}, username: "juliusomo"},
         };
