@@ -17,7 +17,7 @@ function App() {
   // Fetch the user data (from localStorage or local JSON file)
   useEffect(() => {
     // Attempt to access localStorage data
-    const localData = localStorage.length > 0 ? JSON.parse(localStorage.userDataObj) : null;
+    const localData = JSON.parse(localStorage.userDataObj ?? null);
     // Object to store the user data
     const userData = localData?.comments.length > 0 ? localData : data;
 
